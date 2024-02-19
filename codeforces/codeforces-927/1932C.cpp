@@ -9,31 +9,45 @@ int main(){
 		int n, m;
 		cin >> n >> m;
 
-		vector<int> a(n);
+		deque<int> a;
 
-		for(int i=0; i<n; i++)
-			cin >> a[i];
+		for(int i=0; i<n; i++){
+			int x;
+			cin >> x;
+			a.push_back(x);
+		}
 
 		string s;
 		cin >> s; 
 
-		long long int prod = 1;
+		vector<int> v;
 
-		for(auto x: a)
-			prod = prod*((long long int) x);
-
-		int k=0, i=0, j=n-1;
-
-		while(k<n){
-			cout << (prod % m) << " ";
-			if(s[k]=='L'){
-				prod = prod/a[i++];
+		for(int i=0; i<n; i++){
+			if(s[i]=='L'){
+				v.push_back(a.front());
+				a.pop_front();
 			}
 			else{
-				prod = prod/a[j--];
+				v.push_back(a.back());
+				a.pop_back();
 			}
-			k++;
 		}
+
+		reverse(v.begin(), v.end());
+
+		vector<int> ans;
+		int mul = 1;
+
+		for(auto e: v){
+			mul *= e;
+			mul %= m;
+			ans.push_back(mul);
+		}
+
+		reverse(ans.begin(), ans.end());
+
+		for(auto x: ans)
+			cout << x << " ";
 
 		cout<<endl;
 
