@@ -15,11 +15,11 @@ int main(){
 
 		long long int sum = 0;
 		sort(a.begin(), a.end());
-		if(n>2){
-			int temp = a[n-1];
-			a[n-1] = a[1];
-			a[1] = temp;
-		}
+		
+		int temp = a[n-1];
+		a[n-1] = a[1];
+		a[1] = temp;
+
 		for(int i=0; i<n-1; i++){
 			sum = sum + (a[i]+ a[i+1]);
 		}
